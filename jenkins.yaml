@@ -198,7 +198,7 @@ jobs:
             excludes('')
             strategies {
               gitHubBranchDiscovery {
-                strategyId(1) // 1: Only branches, 2: Only pull requests, 3: All branches and PRs
+                strategyId(2) // 1: Only branches, 2: Only pull requests, 3: All branches and PRs
               }
             }
           }
