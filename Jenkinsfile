@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    triggers {
+            issueCommentTrigger '.*@jet.*'
+    }
     stages {
         stage('Build') {
             steps {
