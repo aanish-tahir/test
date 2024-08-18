@@ -188,17 +188,20 @@ jobs:
   - script: >
       multibranchPipelineJob('image-jenkins') {
         branchSources {
-          github {
-            id('12312313') // IMPORTANT: use a constant and unique identifier
-            scanCredentialsId('aanish-tahir')
-            repoOwner('aanish-tahir')
-            repository('test')
+          branchSource {
+            source {
+              github {
+                id('12312313') // IMPORTANT: use a constant and unique identifier
+                scanCredentialsId('aanish-tahir')
+                repoOwner('aanish-tahir')
+                repository('test')
+                includes('master PR-*') // Include all branches
+                excludes('')
 
-            includes('master PR-*') // Include all branches
-            excludes('')
-            strategies {
-              gitHubBranchDiscovery {
-                strategyId(1)
+                // Corrected branch discovery strategy
+                configuredByUrl {
+                  strategyId(1) // 1: Only branches
+                }
               }
             }
           }
@@ -209,8 +212,8 @@ jobs:
           }
         }
         triggers {
-            periodicFolderTrigger {
-              interval('1d') // Scan the repository every day for new branches
-            }
+          periodicFolderTrigger {
+            interval('1d') // Scan the repository every day for new branches
           }
+        }
       }
