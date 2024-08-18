@@ -9,6 +9,7 @@ pipeline {
         }
         stage('Test') {
             steps {
+                sh 'python main.py'
                 echo 'Testing..'
             }
         }
