@@ -202,7 +202,4 @@ jobs:
             numToKeep(1)
           }
         }
-        triggers {
-          periodic(5)
-        }
       }
