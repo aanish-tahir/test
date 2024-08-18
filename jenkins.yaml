@@ -182,10 +182,8 @@ jobs:
           github {
             // The id option in the Git and GitHub branch source contexts is now mandatory (JENKINS-43693).
             id('12312313') // IMPORTANT: use a constant and unique identifier
-            scanCredentialsId('github')
-            repoOwner('my-org')
-            repository('my-repository')
-            apiUri('http://my-github-server/api/v3') // Optional, needed for private github enterprise servers
+            repoOwner('aanish-tahir')
+            repository('test')
           }
           orphanedItemStrategy {
             discardOldItems {
