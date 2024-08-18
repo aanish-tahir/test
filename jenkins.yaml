@@ -167,37 +167,6 @@ unclassified:
     allPipelines: false
     elapsedTimeFormat: "'<b>'HH:mm:ss.S'</b> '"
     systemTimeFormat: "'<b>'HH:mm:ss'</b> '"
-  jobs:
-    - script: >
-        multibranchPipelineJob('example-multibranch-pipeline') {
-          displayName('Example Multibranch Pipeline')
-          branchSources {
-            git {
-              id('example-pipeline')
-              remote('https://github.com/your-repo.git')
-              credentialsId('your-git-credentials-id')
-              includes('*')
-              excludes('')
-              strategy {
-                defaultBranchPropertyStrategy {
-                  props {
-                    excludeBranchesFiledAsPRs()
-                  }
-                }
-              }
-            }
-          }
-          orphanedItemStrategy {
-            discardOldItems {
-              numToKeep(10)
-            }
-          }
-          triggers {
-            periodicFolderTrigger {
-              interval('1d')
-            }
-          }
-        }
 
 tool:
   git:
@@ -207,4 +176,27 @@ tool:
   mavenGlobalConfig:
     globalSettingsProvider: "standard"
     settingsProvider: "standard"
+
+jobs:
+  - script: >
+      multibranchPipelineJob('image-jenkins') {
+        branchSources {
+          github {
+            // The id option in the Git and GitHub branch source contexts is now mandatory (JENKINS-43693).
+            id('12312313') // IMPORTANT: use a constant and unique identifier
+            scanCredentialsId('github')
+            repoOwner('my-org')
+            repository('my-repository')
+            apiUri('http://my-github-server/api/v3') // Optional, needed for private github enterprise servers
+          }
+        }
+        orphanedItemStrategy {
+          discardOldItems {
+            numToKeep(1)
+          }
+        }
+        triggers {
+          periodic(5)
+        }
+      }
 
