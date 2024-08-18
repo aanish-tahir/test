@@ -193,8 +193,14 @@ jobs:
             scanCredentialsId('aanish-tahir')
             repoOwner('aanish-tahir')
             repository('test')
+
             includes('master PR-*') // Include all branches
             excludes('')
+            strategies {
+              gitHubBranchDiscovery {
+                strategyId(1) // 1: Only branches, 2: Only pull requests, 3: All branches and PRs
+              }
+            }
           }
         }
         orphanedItemStrategy {
