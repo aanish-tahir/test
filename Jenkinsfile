@@ -1,6 +1,8 @@
 pipeline {
-    agent any
-
+    agent "aanish"
+    triggers {
+            issueCommentTrigger '.*@jet.*'
+    }
     stages {
         stage('Build') {
             steps {
@@ -9,6 +11,7 @@ pipeline {
         }
         stage('Test') {
             steps {
+                sh 'python main.py'
                 echo 'Testing..'
             }
         }
