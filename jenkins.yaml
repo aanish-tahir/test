@@ -109,6 +109,20 @@ security:
   globalJobDslSecurityConfiguration:
     useScriptSecurity: true
 unclassified:
+  globalLibraries:
+      libraries:
+        - name: "my-shared-library"
+          defaultVersion: "master"
+          implicit: false
+          allowVersionOverride: true
+          includeInChangesets: true
+          retriever:
+            modernSCM:
+              github:
+                repoOwner: "your-github-username"
+                repository: "shared-library-repo"
+                credentialsId: "your-credentials-id"
+                id: "shared-library-id"
   buildDiscarders:
     configuredBuildDiscarders:
     - "jobBuildDiscarder"
