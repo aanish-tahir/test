@@ -167,7 +167,6 @@ unclassified:
     allPipelines: false
     elapsedTimeFormat: "'<b>'HH:mm:ss.S'</b> '"
     systemTimeFormat: "'<b>'HH:mm:ss'</b> '"
-
 tool:
   git:
     installations:
@@ -176,27 +175,13 @@ tool:
   mavenGlobalConfig:
     globalSettingsProvider: "standard"
     settingsProvider: "standard"
-
 jobs:
-  - script: >
-      multibranchPipelineJob('image-jenkins') {
-        branchSources {
-          github {
-            // The id option in the Git and GitHub branch source contexts is now mandatory (JENKINS-43693).
-            id('12312313') // IMPORTANT: use a constant and unique identifier
-            scanCredentialsId('github')
-            repoOwner('my-org')
-            repository('my-repository')
-            apiUri('http://my-github-server/api/v3') // Optional, needed for private github enterprise servers
+  - script: |
+      multibranchPipelineJob('configuration-as-code') {
+          branchSources {
+              git {
+                  id = 'configuration-as-code'
+                  remote('https://github.com/jenkinsci/configuration-as-code-plugin.git')
+              }
           }
-        }
-        orphanedItemStrategy {
-          discardOldItems {
-            numToKeep(1)
-          }
-        }
-        triggers {
-          periodic(5)
-        }
       }
-
