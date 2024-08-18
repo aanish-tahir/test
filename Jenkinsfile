@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent "aanish"
     triggers {
             issueCommentTrigger '.*@jet.*'
     }
