@@ -188,10 +188,21 @@ jobs:
   - script: >
       multibranchPipelineJob('configuration-as-code') {
           displayName('Example Multibranch Pipeline')
-          github {
-            id('12312adfadfad313')
-            repoOwner('aanish-tahir')
-            repository('test')
+          branchSources {
+            branchSource {
+              source {
+                github {
+                  id('12312adfadfad313') // Unique ID for this branch source
+                  credentialsId('your-credentials-id') // GitHub credentials ID
+                  repoOwner('aanish-tahir') // GitHub username or organization
+                  repository('test') // Repository name
+                  includes('*') // Include all branches
+                  excludes('') // Exclude nothing
+                  buildForkPRHead(true) // Build pull requests from forks
+                  buildForkPRMerge(true) // Build merged pull requests from forks
+                }
+              }
+            }
           }
           orphanedItemStrategy {
             discardOldItems {
@@ -199,6 +210,8 @@ jobs:
             }
           }
           triggers {
-            periodic(5)
+            periodicFolderTrigger {
+              interval('5m') // Interval in minutes
+            }
           }
       }
