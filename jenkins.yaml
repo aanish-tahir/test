@@ -4,7 +4,7 @@ credentials:
     - credentials:
       - usernamePassword:
           id: "github"
-          password: "{AQAAABAAAAAwWF5RreRrsQENvrXxNh9tWnokx15m6EciBtc6NLhPW8oCJze0NWXibqfSP1i5S/XuT+ejz7+H5GeeMJltWXEGsg==}"
+          password: "{AQAAABAAAAAwOAu6v/eKwaUryH6QIp8wz0cO2Zy5BlZL9O6rnOVTQY8cgGv8toW7H31eYY4TSsP673xRnoWUuWuFmI4SHB2KGA==}"
           scope: GLOBAL
           username: "aanish-tahir"
 jenkins:
@@ -20,6 +20,11 @@ jenkins:
   disableRememberMe: false
   labelAtoms:
   - name: "built-in"
+  log:
+    recorders:
+    - loggers:
+      - level: "INFO"
+      name: "test"
   markupFormatter: "plainText"
   mode: NORMAL
   myViewsTabBar: "standard"
@@ -114,6 +119,8 @@ unclassified:
     - "jobBuildDiscarder"
   buildStepOperation:
     enabled: false
+  casCGlobalConfig:
+    configurationPath: "https://raw.githubusercontent.com/aanish-tahir/test/main/jenkins.yaml"
   email-ext:
     adminRequiredForTemplateTesting: false
     allowUnregisteredEnabled: false
@@ -184,33 +191,3 @@ tool:
   mavenGlobalConfig:
     globalSettingsProvider: "standard"
     settingsProvider: "standard"
-# jobs:
-#   - script: >
-#       multibranchPipelineJob('image-jenkins') {
-#         branchSources {
-#           github {
-#             id('12312313') // IMPORTANT: use a constant and unique identifier
-#             scanCredentialsId('aanish-tahir')
-#             repoOwner('aanish-tahir')
-#             repository('test')
-
-#             includes('master PR-*') // Include all branches
-#             excludes('')
-#             strategies {
-#               gitHubBranchDiscovery {
-#                 strategyId(1) // 1: Only branches, 2: Only pull requests, 3: All branches and PRs
-#               }
-#             }
-#           }
-#         }
-#         orphanedItemStrategy {
-#           discardOldItems {
-#             numToKeep(1)
-#           }
-#         }
-#         triggers {
-#             periodicFolderTrigger {
-#               interval('1d') // Scan the repository every day for new branches
-#             }
-#           }
-#       }
