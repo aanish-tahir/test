@@ -186,32 +186,23 @@ tool:
     settingsProvider: "standard"
 jobs:
   - script: >
-      multibranchPipelineJob('configuration-as-code') {
-          displayName('Example Multibranch Pipeline')
-          branchSources {
-            branchSource {
-              source {
-                github {
-                  id('12312adfadfad313') // Unique ID for this branch source
-                  credentialsId('your-credentials-id') // GitHub credentials ID
-                  repoOwner('aanish-tahir') // GitHub username or organization
-                  repository('test') // Repository name
-                  includes('*') // Include all branches
-                  excludes('') // Exclude nothing
-                  buildForkPRHead(true) // Build pull requests from forks
-                  buildForkPRMerge(true) // Build merged pull requests from forks
-                }
-              }
-            }
+      multibranchPipelineJob('image-jenkins') {
+        branchSources {
+          github {
+            // The id option in the Git and GitHub branch source contexts is now mandatory (JENKINS-43693).
+            id('12312313') // IMPORTANT: use a constant and unique identifier
+            scanCredentialsId('github')
+            repoOwner('my-org')
+            repository('my-repository')
+            apiUri('http://my-github-server/api/v3') // Optional, needed for private github enterprise servers
           }
-          orphanedItemStrategy {
-            discardOldItems {
-              numToKeep(1)
-            }
+        }
+        orphanedItemStrategy {
+          discardOldItems {
+            numToKeep(1)
           }
-          triggers {
-            periodicFolderTrigger {
-              interval('5m') // Interval in minutes
-            }
-          }
+        }
+        triggers {
+          periodic(5)
+        }
       }
