@@ -185,7 +185,7 @@ tool:
     globalSettingsProvider: "standard"
     settingsProvider: "standard"
 jobs:
-  - script: |
+  - script: >
       multibranchPipelineJob('configuration-as-code') {
           displayName('Example Multibranch Pipeline')
           github {
