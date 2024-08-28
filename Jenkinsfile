@@ -1,5 +1,5 @@
 pipeline {
-    agent "aanish-testing"
+    agent { label "aanish-testing" }
     triggers {
             issueCommentTrigger '.*@jet.*'
     }
